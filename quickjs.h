@@ -356,6 +356,10 @@ JSRuntime *JS_GetRuntime(JSContext *ctx);
 void JS_SetClassProto(JSContext *ctx, JSClassID class_id, JSValue obj);
 JSValue JS_GetClassProto(JSContext *ctx, JSClassID class_id);
 
+void JS_ResetStackPointerRT(JSRuntime *rt);
+void JS_ResetStackPointer(JSContext *ctx);
+
+
 /* the following functions are used to select the intrinsic object to
    save memory */
 JSContext *JS_NewContextRaw(JSRuntime *rt);
@@ -1038,6 +1042,11 @@ int JS_SetModuleExport(JSContext *ctx, JSModuleDef *m, const char *export_name,
                        JSValue val);
 int JS_SetModuleExportList(JSContext *ctx, JSModuleDef *m,
                            const JSCFunctionListEntry *tab, int len);
+
+JSValueConst JS_GetModuleExport(JSContext *ctx, JSModuleDef *m, const char *export_name);
+int JS_GetModuleExportEntriesCount(JSModuleDef *m);
+JSValue JS_GetModuleExportEntry(JSContext *ctx, JSModuleDef *m, int idx);
+JSAtom JS_GetModuleExportEntryName(JSContext *ctx, JSModuleDef *m, int idx);
 
 #undef js_unlikely
 #undef js_force_inline
